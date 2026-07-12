@@ -1,0 +1,122 @@
+/* ── Notifications page ────────────────────────── */
+.notifications-list {
+  display: grid;
+  gap: 14px;
+}
+
+/* ── Notification card ─────────────────────────── */
+.notification-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px 22px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-sm);
+  border-left-width: 3px;
+  border-left-style: solid;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.notification-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* Left accent border by type */
+.notif-info    { border-left-color: var(--primary); }
+.notif-primary { border-left-color: var(--primary); }
+.notif-accent  { border-left-color: var(--accent); }
+.notif-success { border-left-color: var(--success); }
+.notif-danger  { border-left-color: var(--danger); }
+.notif-muted   { border-left-color: var(--muted); }
+
+/* ── Icon ──────────────────────────────────────── */
+.notif-icon-wrap {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(79, 142, 247, 0.1);
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.notif-success .notif-icon-wrap { background: rgba(34, 197, 94, 0.1); }
+.notif-accent  .notif-icon-wrap { background: rgba(0, 212, 170, 0.1); }
+.notif-danger  .notif-icon-wrap { background: rgba(239, 68, 68, 0.1); }
+
+.notif-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* ── Body ──────────────────────────────────────── */
+.notif-body {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-order-id {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.notif-message {
+  color: var(--text) !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.notif-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* ── Badge ─────────────────────────────────────── */
+.notif-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.notif-badge-info,
+.notif-badge-primary { background: rgba(79, 142, 247, 0.12); color: var(--primary); }
+.notif-badge-accent  { background: rgba(0, 212, 170, 0.12);  color: var(--accent); }
+.notif-badge-success { background: rgba(34, 197, 94, 0.12);  color: var(--success); }
+.notif-badge-danger  { background: rgba(239, 68, 68, 0.1);   color: #f87171; }
+.notif-badge-muted   { background: rgba(122, 138, 173, 0.1); color: var(--muted); }
+
+/* ── Time ──────────────────────────────────────── */
+.notif-time {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ── Responsive ────────────────────────────────── */
+@media (max-width: 520px) {
+  .notification-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

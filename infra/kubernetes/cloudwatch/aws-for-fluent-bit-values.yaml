@@ -1,0 +1,32 @@
+﻿serviceAccount:
+  create: false
+  name: aws-for-fluent-bit
+
+cloudWatch:
+  enabled: false
+
+cloudWatchLogs:
+  enabled: true
+  region: us-east-1
+  logGroupName: /aws/eks/swiftmart/application
+  logStreamPrefix: swiftmart-
+  autoCreateGroup: false
+  logRetentionDays: 7
+
+firehose:
+  enabled: false
+
+kinesis:
+  enabled: false
+
+kinesis_streams:
+  enabled: false
+
+elasticsearch:
+  enabled: false
+
+opensearch:
+  enabled: false
+
+s3:
+  enabled: false

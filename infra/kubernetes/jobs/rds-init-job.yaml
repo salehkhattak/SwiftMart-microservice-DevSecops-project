@@ -1,0 +1,48 @@
+﻿apiVersion: batch/v1
+kind: Job
+metadata:
+  name: swiftmart-rds-init
+  namespace: swiftmart
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        app: swiftmart-rds-init
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: postgres-client
+          image: postgres:16
+          env:
+            - name: PGHOST
+              value: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: rds-init-secret
+                  key: DB_NAME
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: rds-init-secret
+                  key: DB_USER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rds-init-secret
+                  key: DB_PASSWORD
+          command:
+            - bash
+            - -lc
+            - psql -v ON_ERROR_STOP=1 -f /sql/init.sql
+          volumeMounts:
+            - name: init-sql
+              mountPath: /sql
+              readOnly: true
+      volumes:
+        - name: init-sql
+          configMap:
+            name: swiftmart-init-sql

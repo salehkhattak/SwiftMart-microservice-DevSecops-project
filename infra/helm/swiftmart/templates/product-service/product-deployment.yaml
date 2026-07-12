@@ -1,0 +1,47 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product-service
+          image: "{{ .Values.images.productService.repository }}:{{ .Values.images.productService.tag }}"
+          imagePullPolicy: {{ .Values.images.productService.pullPolicy }}
+          ports:
+            - containerPort: 5002
+          envFrom:
+            - configMapRef:
+                name: product-config
+            - secretRef:
+                name: product-secret
+          resources:
+             requests:
+               cpu: "100m"
+               memory: "128Mi"
+             limits:
+                cpu: "500m"
+                memory: "512Mi"
+          readinessProbe:
+              httpGet:
+                 path: /health
+                 port: 5002
+              initialDelaySeconds: 10
+              periodSeconds: 5
+
+          livenessProbe:
+                httpGet:
+                    path: /health
+                    port: 5002
+                initialDelaySeconds: 20
+                periodSeconds: 10

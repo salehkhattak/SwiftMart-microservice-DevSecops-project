@@ -1,0 +1,10 @@
+{{- if .Values.postgres.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: {{ .Release.Namespace }}
+data:
+  POSTGRES_HOST: postgres-service
+  POSTGRES_PORT: "5432"
+{{- end }}

@@ -1,0 +1,56 @@
+﻿{{- if .Values.monitoring.alertmanagerConfig.enabled }}
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: swiftmart-alertmanager-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: swiftmart
+spec:
+  route:
+    receiver: {{ .Values.monitoring.alertmanagerConfig.receiverName }}
+    groupBy:
+      - alertname
+      - namespace
+      - service
+      - severity
+    groupWait: {{ .Values.monitoring.alertmanagerConfig.groupWait }}
+    groupInterval: {{ .Values.monitoring.alertmanagerConfig.groupInterval }}
+    repeatInterval: {{ .Values.monitoring.alertmanagerConfig.repeatInterval }}
+    matchers:
+      - name: namespace
+        matchType: =
+        value: {{ .Release.Namespace }}
+  receivers:
+    - name: {{ .Values.monitoring.alertmanagerConfig.receiverName }}
+{{- if .Values.monitoring.alertmanagerConfig.sns.enabled }}
+      snsConfigs:
+        - topicARN: {{ .Values.monitoring.alertmanagerConfig.sns.topicArn }}
+          sigv4:
+            region: {{ .Values.monitoring.alertmanagerConfig.sns.region }}
+          subject: {{ .Values.monitoring.alertmanagerConfig.sns.subject | quote }}
+          sendResolved: true
+          message: |-
+            {{`{{ range .Alerts }}`}}
+            Alert: {{`{{ .Labels.alertname }}`}}
+            Severity: {{`{{ .Labels.severity }}`}}
+            Namespace: {{`{{ .Labels.namespace }}`}}
+            Service: {{`{{ .Labels.service }}`}}{{`{{ .Labels.job }}`}}
+            Summary: {{`{{ .Annotations.summary }}`}}
+            Description: {{`{{ .Annotations.description }}`}}
+            Status: {{`{{ .Status }}`}}
+            {{`{{ end }}`}}
+{{- end }}
+{{- if .Values.monitoring.alertmanagerConfig.email.enabled }}
+      emailConfigs:
+        - to: {{ .Values.monitoring.alertmanagerConfig.email.to | quote }}
+          from: {{ .Values.monitoring.alertmanagerConfig.email.from | quote }}
+          smarthost: {{ .Values.monitoring.alertmanagerConfig.email.smarthost | quote }}
+          authUsername: {{ .Values.monitoring.alertmanagerConfig.email.authUsername | quote }}
+          authPassword:
+            name: {{ .Values.monitoring.alertmanagerConfig.email.authPasswordSecretName }}
+            key: {{ .Values.monitoring.alertmanagerConfig.email.authPasswordSecretKey }}
+          requireTLS: true
+          sendResolved: true
+{{- end }}
+{{- end }}

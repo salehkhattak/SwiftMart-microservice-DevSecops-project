@@ -1,0 +1,13 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cart-config
+  namespace: {{ .Release.Namespace }}
+data:
+  PORT: "5004"
+  SERVICE_NAME: cart-service
+  DB_HOST: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
+  DB_PORT: "5432"
+  DB_NAME: swiftmart_db
+  DB_SSL: "true"
+  REDIS_URL: redis://swiftmart-redis.ycv67f.0001.use1.cache.amazonaws.com:6379

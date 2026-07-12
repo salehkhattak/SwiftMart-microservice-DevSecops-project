@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-config
+  namespace: {{ .Release.Namespace }}
+data:
+  PORT: "5003"
+  SERVICE_NAME: order-service
+  DB_HOST: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
+  DB_PORT: "5432"
+  DB_NAME: swiftmart_db
+  DB_SSL: "true"
+  AWS_REGION: {{ .Values.messaging.awsRegion | quote }}
+  ORDER_EVENTS_TOPIC_ARN: {{ .Values.messaging.orderEventsTopicArn | quote }}

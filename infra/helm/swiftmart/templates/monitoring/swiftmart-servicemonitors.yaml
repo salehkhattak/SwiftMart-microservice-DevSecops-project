@@ -1,0 +1,29 @@
+{{- if .Values.monitoring.serviceMonitor.enabled }}
+{{- $root := . }}
+{{- $services := list "auth-service" "product-service" "cart-service" "order-service" "notification-service" }}
+{{- range $service := $services }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ $service }}
+  namespace: {{ $root.Release.Namespace }}
+  labels:
+    app: {{ $service }}
+{{- range $key, $value := $root.Values.monitoring.serviceMonitor.labels }}
+    {{ $key }}: {{ $value | quote }}
+{{- end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ $service }}
+  namespaceSelector:
+    matchNames:
+      - {{ $root.Release.Namespace }}
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: {{ $root.Values.monitoring.serviceMonitor.interval }}
+      scrapeTimeout: {{ $root.Values.monitoring.serviceMonitor.scrapeTimeout }}
+{{- end }}
+{{- end }}

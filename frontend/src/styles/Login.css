@@ -1,0 +1,111 @@
+/* ── Auth pages ────────────────────────────────── */
+.auth-page {
+  width: min(100% - 40px, 460px);
+  margin: 0 auto;
+  padding: 60px 0 80px;
+}
+
+/* ── Auth card ─────────────────────────────────── */
+.auth-card {
+  display: grid;
+  gap: 16px;
+  padding: 36px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Logo mark ─────────────────────────────────── */
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.auth-logo-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #4f8ef7, #00d4aa);
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  box-shadow: 0 8px 28px rgba(79, 142, 247, 0.45);
+}
+
+/* ── Heading ───────────────────────────────────── */
+.auth-card h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.auth-card > p {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: -4px;
+}
+
+/* ── Form ──────────────────────────────────────── */
+.auth-card form {
+  display: grid;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.form-group {
+  display: grid;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-2);
+  letter-spacing: 0.02em;
+}
+
+.auth-card button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* ── Switch link ───────────────────────────────── */
+.auth-switch {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted) !important;
+  margin-top: 4px;
+}
+
+.auth-switch a {
+  color: var(--primary);
+  font-weight: 700;
+  transition: color 160ms ease;
+}
+
+.auth-switch a:hover {
+  color: var(--accent);
+}
+
+/* ── Responsive ────────────────────────────────── */
+@media (max-width: 560px) {
+  .auth-page {
+    width: min(100% - 24px, 460px);
+    padding-top: 36px;
+  }
+
+  .auth-card {
+    padding: 24px 20px;
+  }
+}

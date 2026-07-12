@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.images.frontend.repository }}:{{ .Values.images.frontend.tag }}"
+          imagePullPolicy: {{ .Values.images.frontend.pullPolicy }}
+          ports:
+            - containerPort: 80
+          resources:
+                requests:
+                   cpu: "50m"
+                   memory: "64Mi"
+                limits:
+                   cpu: "250m"
+                   memory: "256Mi"
+          readinessProbe:
+              httpGet:
+                  path: /
+                  port: 80
+              initialDelaySeconds: 10
+              periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+               path: /
+               port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 10

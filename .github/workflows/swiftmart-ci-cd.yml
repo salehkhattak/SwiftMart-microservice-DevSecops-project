@@ -1,0 +1,151 @@
+﻿name: SwiftMart CI/CD
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "infra/helm/swiftmart/values.yaml"
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+  AWS_ACCOUNT_ID: "506098131053"
+
+jobs:
+  build-push-deploy:
+    name: Build, Scan, Push, and Update GitOps
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig
+          severity: CRITICAL,HIGH
+          format: table
+          exit-code: "0"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set image tag
+        run: echo "IMAGE_TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+
+      - name: Build Docker images
+        env:
+          ECR_REGISTRY: ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+        run: |
+          set -euo pipefail
+
+          services=(
+            "auth-service services/auth-service swiftmart-auth-service"
+            "product-service services/product-service swiftmart-product-service"
+            "cart-service services/cart-service swiftmart-cart-service"
+            "order-service services/order-service swiftmart-order-service"
+            "notification-service services/notification-service swiftmart-notification-service"
+            "frontend frontend swiftmart-frontend"
+          )
+
+          for service in "${services[@]}"; do
+            read -r name context repository <<< "$service"
+
+            echo "Building $name"
+            if [ "$name" = "frontend" ]; then
+              docker build \
+                --build-arg ENV_FILE=.env.kubernetes \
+                -t "$ECR_REGISTRY/$repository:$IMAGE_TAG" \
+                -t "$ECR_REGISTRY/$repository:latest" \
+                "$context"
+            else
+              docker build \
+                -t "$ECR_REGISTRY/$repository:$IMAGE_TAG" \
+                -t "$ECR_REGISTRY/$repository:latest" \
+                "$context"
+            fi
+          done
+
+      - name: Run Trivy image scans
+        env:
+          ECR_REGISTRY: ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+        run: |
+          set -euo pipefail
+
+          services=(
+            "auth-service swiftmart-auth-service"
+            "product-service swiftmart-product-service"
+            "cart-service swiftmart-cart-service"
+            "order-service swiftmart-order-service"
+            "notification-service swiftmart-notification-service"
+            "frontend swiftmart-frontend"
+          )
+
+          for service in "${services[@]}"; do
+            read -r name repository <<< "$service"
+
+            echo "Scanning $name image"
+            docker run --rm \
+              -v /var/run/docker.sock:/var/run/docker.sock \
+              -v "$HOME/.cache/trivy:/root/.cache/" \
+              aquasec/trivy:latest image \
+              --scanners vuln,secret,misconfig \
+              --severity CRITICAL,HIGH \
+              --format table \
+              --exit-code 0 \
+              "$ECR_REGISTRY/$repository:$IMAGE_TAG"
+          done
+
+      - name: Push Docker images to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+        run: |
+          set -euo pipefail
+
+          services=(
+            "auth-service swiftmart-auth-service"
+            "product-service swiftmart-product-service"
+            "cart-service swiftmart-cart-service"
+            "order-service swiftmart-order-service"
+            "notification-service swiftmart-notification-service"
+            "frontend swiftmart-frontend"
+          )
+
+          for service in "${services[@]}"; do
+            read -r name repository <<< "$service"
+
+            echo "Pushing $name"
+            docker push "$ECR_REGISTRY/$repository:$IMAGE_TAG"
+            docker push "$ECR_REGISTRY/$repository:latest"
+          done
+
+      - name: Update Helm image tags for Argo CD
+        run: |
+          set -euo pipefail
+
+          perl -0pi -e 's/(authService:\n\s+repository: [^\n]+\n\s+tag: ).*/${1}"$ENV{IMAGE_TAG}"/' infra/helm/swiftmart/values.yaml
+          perl -0pi -e 's/(productService:\n\s+repository: [^\n]+\n\s+tag: ).*/${1}"$ENV{IMAGE_TAG}"/' infra/helm/swiftmart/values.yaml
+          perl -0pi -e 's/(cartService:\n\s+repository: [^\n]+\n\s+tag: ).*/${1}"$ENV{IMAGE_TAG}"/' infra/helm/swiftmart/values.yaml
+          perl -0pi -e 's/(orderService:\n\s+repository: [^\n]+\n\s+tag: ).*/${1}"$ENV{IMAGE_TAG}"/' infra/helm/swiftmart/values.yaml
+          perl -0pi -e 's/(notificationService:\n\s+repository: [^\n]+\n\s+tag: ).*/${1}"$ENV{IMAGE_TAG}"/' infra/helm/swiftmart/values.yaml
+          perl -0pi -e 's/(frontend:\n\s+repository: [^\n]+\n\s+tag: ).*/${1}"$ENV{IMAGE_TAG}"/' infra/helm/swiftmart/values.yaml
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add infra/helm/swiftmart/values.yaml
+          git commit -m "Update SwiftMart image tag to $IMAGE_TAG" || echo "No image tag changes to commit"
+          git push

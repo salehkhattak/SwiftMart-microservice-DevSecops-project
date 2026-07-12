@@ -1,0 +1,11 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cart-config
+  namespace: swiftmart
+data:
+  PORT: "5004"
+  DB_HOST: postgres-service
+  DB_PORT: "5432"
+  DB_NAME: swiftmart_db
+  REDIS_URL: redis://redis-service:6379

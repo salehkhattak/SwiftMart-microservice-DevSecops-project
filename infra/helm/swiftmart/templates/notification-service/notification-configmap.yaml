@@ -1,0 +1,15 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notification-config
+  namespace: {{ .Release.Namespace }}
+data:
+  PORT: "5005"
+  SERVICE_NAME: notification-service
+  DB_HOST: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
+  DB_PORT: "5432"
+  DB_NAME: swiftmart_db
+  DB_SSL: "true"
+  AWS_REGION: {{ .Values.messaging.awsRegion | quote }}
+  NOTIFICATION_EVENTS_QUEUE_URL: {{ .Values.messaging.notificationEventsQueueUrl | quote }}
+  SQS_POLL_INTERVAL_MS: {{ .Values.messaging.sqsPollIntervalMs | quote }}
