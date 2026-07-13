@@ -16,7 +16,7 @@ spec:
           image: postgres:16
           env:
             - name: PGHOST
-              value: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
+              value: swiftmart-postgres.cm38oaisqrjx.us-east-1.rds.amazonaws.com
             - name: PGPORT
               value: "5432"
             - name: PGDATABASE
@@ -34,6 +34,8 @@ spec:
                 secretKeyRef:
                   name: rds-init-secret
                   key: DB_PASSWORD
+            - name: PGSSLMODE
+              value: require
           command:
             - bash
             - -lc
