@@ -21,15 +21,35 @@ messaging:
   sqsPollIntervalMs: "5000"
 
 monitoring:
- monitoring:
   serviceMonitor:
-    enabled: false
-
+    enabled: true
+    interval: 30s
+    scrapeTimeout: 10s
+    labels:
+      release: monitoring
   prometheusRules:
-    enabled: false
-
+    enabled: true
+    labels:
+      release: monitoring
   alertmanagerConfig:
-    enabled: false
+    enabled: true
+    receiverName: swiftmart-sns-alerts
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 2h
+    sns:
+      enabled: true
+      topicArn: arn:aws:sns:us-east-1:436629684296:swiftmart-monitoring-alerts
+      region: us-east-1
+      subject: SwiftMart monitoring alert
+    email:
+      enabled: true
+      to: salehktk005@gmail.com
+      from: ""
+      smarthost: ""
+      authUsername: ""
+      authPasswordSecretName: swiftmart-alertmanager-email-secret
+      authPasswordSecretKey: smtp-password
 
 images:
   authService:
