@@ -43,7 +43,7 @@ monitoring:
       region: us-east-1
       subject: SwiftMart monitoring alert
     email:
-      enabled: true
+      enabled: false
       to: salehktk005@gmail.com
       from: ""
       smarthost: ""
