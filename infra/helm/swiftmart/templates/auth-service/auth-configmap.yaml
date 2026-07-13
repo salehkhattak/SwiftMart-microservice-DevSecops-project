@@ -6,7 +6,7 @@ metadata:
 data:
   PORT: "5001"
   SERVICE_NAME: auth-service
-  DB_HOST: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
-  DB_PORT: "5432"
-  DB_NAME: swiftmart_db
-  DB_SSL: "true"
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_PORT: {{ .Values.database.port | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+  DB_SSL: {{ .Values.database.ssl | quote }}

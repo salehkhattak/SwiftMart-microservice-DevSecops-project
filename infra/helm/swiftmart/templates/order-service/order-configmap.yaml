@@ -6,9 +6,9 @@ metadata:
 data:
   PORT: "5003"
   SERVICE_NAME: order-service
-  DB_HOST: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
-  DB_PORT: "5432"
-  DB_NAME: swiftmart_db
-  DB_SSL: "true"
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_PORT: {{ .Values.database.port | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+  DB_SSL: {{ .Values.database.ssl | quote }}
   AWS_REGION: {{ .Values.messaging.awsRegion | quote }}
   ORDER_EVENTS_TOPIC_ARN: {{ .Values.messaging.orderEventsTopicArn | quote }}

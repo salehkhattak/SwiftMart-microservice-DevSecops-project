@@ -6,10 +6,10 @@ metadata:
 data:
   PORT: "5005"
   SERVICE_NAME: notification-service
-  DB_HOST: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
-  DB_PORT: "5432"
-  DB_NAME: swiftmart_db
-  DB_SSL: "true"
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_PORT: {{ .Values.database.port | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+  DB_SSL: {{ .Values.database.ssl | quote }}
   AWS_REGION: {{ .Values.messaging.awsRegion | quote }}
   NOTIFICATION_EVENTS_QUEUE_URL: {{ .Values.messaging.notificationEventsQueueUrl | quote }}
   SQS_POLL_INTERVAL_MS: {{ .Values.messaging.sqsPollIntervalMs | quote }}

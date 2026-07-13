@@ -6,8 +6,8 @@ metadata:
 data:
   PORT: "5004"
   SERVICE_NAME: cart-service
-  DB_HOST: swiftmart-postgres.ccnwaycacsuq.us-east-1.rds.amazonaws.com
-  DB_PORT: "5432"
-  DB_NAME: swiftmart_db
-  DB_SSL: "true"
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_PORT: {{ .Values.database.port | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+  DB_SSL: {{ .Values.database.ssl | quote }}
   REDIS_URL: redis://swiftmart-redis.ycv67f.0001.use1.cache.amazonaws.com:6379
