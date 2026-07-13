@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/Fathima2125/swiftmart-microservices-platform.git
+    repoURL: https://github.com/salehkhattak/SwiftMart-microservice-DevSecops-project.git
     targetRevision: main
     path: infra/helm/swiftmart
 

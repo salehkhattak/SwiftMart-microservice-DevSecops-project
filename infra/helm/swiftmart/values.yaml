@@ -16,8 +16,8 @@ localIngress:
 
 messaging:
   awsRegion: us-east-1
-  orderEventsTopicArn: arn:aws:sns:us-east-1:506098131053:swiftmart-order-events
-  notificationEventsQueueUrl: https://sqs.us-east-1.amazonaws.com/506098131053/swiftmart-notification-events
+  orderEventsTopicArn: arn:aws:sns:us-east-1:436629684296:swiftmart-order-events
+  notificationEventsQueueUrl: https://sqs.us-east-1.amazonaws.com/436629684296/swiftmart-notification-events
   sqsPollIntervalMs: "5000"
 
 monitoring:
@@ -39,12 +39,12 @@ monitoring:
     repeatInterval: 2h
     sns:
       enabled: true
-      topicArn: arn:aws:sns:us-east-1:506098131053:swiftmart-monitoring-alerts
+      topicArn: arn:aws:sns:us-east-1:436629684296:swiftmart-monitoring-alerts
       region: us-east-1
       subject: SwiftMart monitoring alert
     email:
       enabled: false
-      to: fathimayosra25@gmail.com
+      to: salehktk005@gmail.com
       from: ""
       smarthost: ""
       authUsername: ""
@@ -53,27 +53,27 @@ monitoring:
 
 images:
   authService:
-    repository: 506098131053.dkr.ecr.us-east-1.amazonaws.com/swiftmart-auth-service
+    repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-auth-service
     tag: "sha-f24006f"
     pullPolicy: Always
   productService:
-    repository: 506098131053.dkr.ecr.us-east-1.amazonaws.com/swiftmart-product-service
+    repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-product-service
     tag: "sha-f24006f"
     pullPolicy: Always
   cartService:
-    repository: 506098131053.dkr.ecr.us-east-1.amazonaws.com/swiftmart-cart-service
+    repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-cart-service
     tag: "sha-f24006f"
     pullPolicy: Always
   orderService:
-    repository: 506098131053.dkr.ecr.us-east-1.amazonaws.com/swiftmart-order-service
+    repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-order-service
     tag: "sha-f24006f"
     pullPolicy: Always
   notificationService:
-    repository: 506098131053.dkr.ecr.us-east-1.amazonaws.com/swiftmart-notification-service
+    repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-notification-service
     tag: "sha-f24006f"
     pullPolicy: Always
   frontend:
-    repository: 506098131053.dkr.ecr.us-east-1.amazonaws.com/swiftmart-frontend
+    repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-frontend
     tag: "sha-f24006f"
     pullPolicy: Always
 
