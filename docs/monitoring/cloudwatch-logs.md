@@ -1,4 +1,4 @@
-﻿# SwiftMart CloudWatch Logs Integration
+# SwiftMart CloudWatch Logs Integration
 
 This phase sends Kubernetes pod logs from EKS to Amazon CloudWatch Logs.
 
@@ -82,7 +82,7 @@ Expected:
 
 ```text
 cloudwatch_log_group_name = "/aws/eks/swiftmart/application"
-fluent_bit_cloudwatch_policy_arn = "arn:aws:iam::506098131053:policy/swiftmart-fluent-bit-cloudwatch-policy"
+fluent_bit_cloudwatch_policy_arn = "arn:aws:iam::436629684296:policy/swiftmart-fluent-bit-cloudwatch-policy"
 ```
 
 ## Create IRSA Service Account
@@ -96,7 +96,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace amazon-cloudwatch \
   --name aws-for-fluent-bit \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/swiftmart-fluent-bit-cloudwatch-policy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/swiftmart-fluent-bit-cloudwatch-policy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve

@@ -1,7 +1,7 @@
-ï»¿## Terraform Backend Phase â€” S3 + DynamoDB Locking
+## Terraform Backend Phase — S3 + DynamoDB Locking
 
-Terraform state â†’ stored in S3
-Terraform lock â†’ managed by DynamoDB
+Terraform state ? stored in S3
+Terraform lock ? managed by DynamoDB
 
 ## Steps:
 ### A. Create backend resources manually
@@ -76,7 +76,7 @@ Expected:
 
 "ACTIVE"
 
-### B â€” Add backend config to Terraform
+### B — Add backend config to Terraform
 
 Open:
 
@@ -89,7 +89,7 @@ terraform {
   required_version = ">= 1.6.0"
 
   backend "s3" {
-    bucket         = "swiftmart-terraform-state-506098131053"
+    bucket         = "swiftmart-terraform-state-436629684296"
     key            = "dev/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "swiftmart-terraform-locks"
@@ -114,7 +114,7 @@ Use your real bucket name from:
 echo $TF_STATE_BUCKET
 ```
 
-### C â€” Migrate local state to S3
+### C — Migrate local state to S3
 
 From:
 
@@ -136,7 +136,7 @@ terraform state list
 
 You should still see your resources.
 
-### D â€” Test lock
+### D — Test lock
 
 Run:
 ```
@@ -154,7 +154,7 @@ S3 stores the Terraform state file remotely with versioning and encryption enabl
 DynamoDB provides state locking to prevent multiple Terraform operations from running at the same time.
 
 Backend:
-- S3 bucket: swiftmart-terraform-state-506098131053
+- S3 bucket: swiftmart-terraform-state-436629684296
 - State key: dev/terraform.tfstate
 - DynamoDB table: swiftmart-terraform-locks
 - Region: us-east-1

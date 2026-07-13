@@ -1,4 +1,4 @@
-﻿# Redeploy SwiftMart After Terraform Destroy
+# Redeploy SwiftMart After Terraform Destroy
 
 Use this guide after you previously ran `terraform destroy` and want to bring SwiftMart back online.
 
@@ -137,7 +137,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace swiftmart \
   --name order-service-sa \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/SwiftMartOrderEventsPublisherPolicy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/SwiftMartOrderEventsPublisherPolicy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -150,7 +150,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace swiftmart \
   --name notification-service-sa \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/SwiftMartNotificationEventsConsumerPolicy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/SwiftMartNotificationEventsConsumerPolicy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -163,7 +163,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace kube-system \
   --name aws-load-balancer-controller \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/AWSLoadBalancerControllerIAMPolicy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -234,7 +234,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace monitoring \
   --name monitoring-kube-prometheus-alertmanager \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/swiftmart-monitoring-alerts-publish-policy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/swiftmart-monitoring-alerts-publish-policy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -288,7 +288,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace amazon-cloudwatch \
   --name aws-for-fluent-bit \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/swiftmart-fluent-bit-cloudwatch-policy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/swiftmart-fluent-bit-cloudwatch-policy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve

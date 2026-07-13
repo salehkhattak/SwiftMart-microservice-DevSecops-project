@@ -1,4 +1,4 @@
-﻿# SwiftMart GitHub Actions CI/CD
+# SwiftMart GitHub Actions CI/CD
 
 This phase automates the SwiftMart deployment flow:
 
@@ -52,7 +52,7 @@ GitHub repository
 Example value:
 
 ```text
-arn:aws:iam::506098131053:role/swiftmart-github-actions-oidc-role
+arn:aws:iam::436629684296:role/swiftmart-github-actions-oidc-role
 ```
 
 The AWS role used by this secret needs permission to:
@@ -151,7 +151,7 @@ Example:
 ```yaml
 images:
   frontend:
-    repository: 506098131053.dkr.ecr.us-east-1.amazonaws.com/swiftmart-frontend
+    repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-frontend
     tag: latest
     pullPolicy: Always
 ```

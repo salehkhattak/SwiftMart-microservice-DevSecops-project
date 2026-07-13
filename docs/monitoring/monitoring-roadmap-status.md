@@ -1,4 +1,4 @@
-﻿# SwiftMart Monitoring Roadmap Status
+# SwiftMart Monitoring Roadmap Status
 
 This document tracks what has been completed in the SwiftMart monitoring phase and what remains.
 
@@ -190,7 +190,7 @@ Verify the subscription:
 
 ```bash
 aws sns list-subscriptions-by-topic \
-  --topic-arn arn:aws:sns:us-east-1:506098131053:swiftmart-monitoring-alerts \
+  --topic-arn arn:aws:sns:us-east-1:436629684296:swiftmart-monitoring-alerts \
   --region us-east-1
 ```
 
@@ -206,7 +206,7 @@ kubectl get serviceaccount monitoring-kube-prometheus-alertmanager -n monitoring
 The service account should have an annotation like:
 
 ```text
-eks.amazonaws.com/role-arn: arn:aws:iam::506098131053:role/...
+eks.amazonaws.com/role-arn: arn:aws:iam::436629684296:role/...
 ```
 
 This is IRSA. It allows Alertmanager to publish to SNS without storing AWS access keys in Kubernetes.

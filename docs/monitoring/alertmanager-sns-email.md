@@ -1,4 +1,4 @@
-﻿# SwiftMart Alertmanager SNS Email Receiver
+# SwiftMart Alertmanager SNS Email Receiver
 
 This phase connects SwiftMart Prometheus alerts to AWS SNS and email.
 
@@ -91,7 +91,7 @@ Verify:
 
 ```bash
 aws sns list-subscriptions-by-topic \
-  --topic-arn arn:aws:sns:us-east-1:506098131053:swiftmart-monitoring-alerts \
+  --topic-arn arn:aws:sns:us-east-1:436629684296:swiftmart-monitoring-alerts \
   --region us-east-1
 ```
 
@@ -121,7 +121,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace monitoring \
   --name monitoring-kube-prometheus-alertmanager \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/swiftmart-monitoring-alerts-publish-policy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/swiftmart-monitoring-alerts-publish-policy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -173,7 +173,7 @@ The loaded config should contain:
 
 ```text
 sns_configs
-topic_arn: arn:aws:sns:us-east-1:506098131053:swiftmart-monitoring-alerts
+topic_arn: arn:aws:sns:us-east-1:436629684296:swiftmart-monitoring-alerts
 ```
 
 ## Send A Safe Test Alert

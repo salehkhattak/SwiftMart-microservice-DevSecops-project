@@ -1,4 +1,4 @@
-﻿# SwiftMart SNS + SQS Event-Driven Notifications
+# SwiftMart SNS + SQS Event-Driven Notifications
 
 This phase changes SwiftMart notifications from direct service-to-service calls into an AWS event-driven flow.
 
@@ -48,11 +48,11 @@ Create the IAM policies once:
 ```bash
 aws iam create-policy \
   --policy-name SwiftMartOrderEventsPublisherPolicy \
-  --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["sns:Publish"],"Resource":"arn:aws:sns:us-east-1:506098131053:swiftmart-order-events"}]}'
+  --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["sns:Publish"],"Resource":"arn:aws:sns:us-east-1:436629684296:swiftmart-order-events"}]}'
 
 aws iam create-policy \
   --policy-name SwiftMartNotificationEventsConsumerPolicy \
-  --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["sqs:ReceiveMessage","sqs:DeleteMessage","sqs:GetQueueAttributes"],"Resource":"arn:aws:sqs:us-east-1:506098131053:swiftmart-notification-events"}]}'
+  --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["sqs:ReceiveMessage","sqs:DeleteMessage","sqs:GetQueueAttributes"],"Resource":"arn:aws:sqs:us-east-1:436629684296:swiftmart-notification-events"}]}'
 ```
 
 After a full EKS destroy/apply, recreate the IRSA service accounts:
@@ -62,7 +62,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace swiftmart \
   --name order-service-sa \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/SwiftMartOrderEventsPublisherPolicy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/SwiftMartOrderEventsPublisherPolicy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -71,7 +71,7 @@ eksctl create iamserviceaccount \
   --cluster swiftmart-eks-cluster \
   --namespace swiftmart \
   --name notification-service-sa \
-  --attach-policy-arn arn:aws:iam::506098131053:policy/SwiftMartNotificationEventsConsumerPolicy \
+  --attach-policy-arn arn:aws:iam::436629684296:policy/SwiftMartNotificationEventsConsumerPolicy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -102,8 +102,8 @@ The Helm chart passes AWS messaging configuration through ConfigMaps:
 ```yaml
 messaging:
   awsRegion: us-east-1
-  orderEventsTopicArn: arn:aws:sns:us-east-1:506098131053:swiftmart-order-events
-  notificationEventsQueueUrl: https://sqs.us-east-1.amazonaws.com/506098131053/swiftmart-notification-events
+  orderEventsTopicArn: arn:aws:sns:us-east-1:436629684296:swiftmart-order-events
+  notificationEventsQueueUrl: https://sqs.us-east-1.amazonaws.com/436629684296/swiftmart-notification-events
 ```
 
 ## Why This Is Better
