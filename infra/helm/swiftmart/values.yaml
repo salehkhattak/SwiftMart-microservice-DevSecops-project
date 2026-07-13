@@ -54,27 +54,27 @@ monitoring:
 images:
   authService:
     repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-auth-service
-    tag: "sha-8c2e44b"
+    tag: "sha-a27bc5c"
     pullPolicy: Always
   productService:
     repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-product-service
-    tag: "sha-8c2e44b"
+    tag: "sha-a27bc5c"
     pullPolicy: Always
   cartService:
     repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-cart-service
-    tag: "sha-8c2e44b"
+    tag: "sha-a27bc5c"
     pullPolicy: Always
   orderService:
     repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-order-service
-    tag: "sha-8c2e44b"
+    tag: "sha-a27bc5c"
     pullPolicy: Always
   notificationService:
     repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-notification-service
-    tag: "sha-8c2e44b"
+    tag: "sha-a27bc5c"
     pullPolicy: Always
   frontend:
     repository: 436629684296.dkr.ecr.us-east-1.amazonaws.com/swiftmart-frontend
-    tag: "sha-8c2e44b"
+    tag: "sha-a27bc5c"
     pullPolicy: Always
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
