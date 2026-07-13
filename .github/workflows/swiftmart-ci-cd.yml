@@ -10,7 +10,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  AWS_ACCOUNT_ID: "506098131053"
+  AWS_ACCOUNT_ID: "436629684296"
 
 jobs:
   build-push-deploy:
