@@ -203,10 +203,7 @@ For SwiftMart, a custom dashboard is better than generic imported dashboards bec
 ## Screenshots To Capture
 
 #### Prometheus targets showing SwiftMart services UP
-![alt text](<../aws/screenshots/Prometheus targets showing SwiftMart services UP.png>)
-
-#### ServiceMonitor list in swiftmart namespace
-![alt text](<../aws/screenshots/ServiceMonitor list in swiftmart .png>)
+![alt text](<../aws/screenshots/eks obser.png>)
 
 #### Grafana SwiftMart Observability dashboard
 ![alt text](<../aws/screenshots/Grafana SwiftMart Observability dashboard.png>)
@@ -226,5 +223,4 @@ For SwiftMart, a custom dashboard is better than generic imported dashboards bec
 ![alt text](<../aws/screenshots/Node.js heap used panel.png>)
 
 ![alt text](<../aws/screenshots/Node.js-event loop panel.png>)
-
 

@@ -241,29 +241,22 @@ Take screenshots of:
 
 
 1. Terraform apply output showing CloudWatch log group and IAM policy
-![alt text](<../aws/screenshots/ Terraform apply output showing CloudWatch log group and IAM policy.png>)
 
 
 2. kubectl get pods -n amazon-cloudwatch -o wide
-![alt text](<../aws/screenshots/kubectl get pods -n amazon-cloudwatch -o wide.png>)
 
 3. kubectl get serviceaccount aws-for-fluent-bit -n amazon-cloudwatch -o yaml
-![alt text](<../aws/screenshots/kubectl get serviceaccount aws-for-fluent-bit -n amazon-cloudwatch -o yaml.png>)
 
 4. kubectl logs -n amazon-cloudwatch daemonset/aws-for-fluent-bit --tail=120
-![alt text](<../aws/screenshots/kubectl logs -n amazon-cloudwatch daemonset:aws-for-fluent-bit --tail=120.png>)
 
 5. AWS CloudWatch log group: /aws/eks/swiftmart/application
-![alt text](<../aws/screenshots/AWS CloudWatch log :aws:eks:swiftmart:application.png>)
+![alt text](<../aws/screenshots/cloudwatchlogs.png>)
 
 6. CloudWatch log streams showing SwiftMart pods
-![alt text](<../aws/screenshots/ CloudWatch log streams showing SwiftMart pods.png>)
 
 7. Sample product-service log event in CloudWatch
-![alt text](<../aws/screenshots/ Sample product-service log event in CloudWatch.png>)
 
 8. eks.amazonaws.com/role-arn
-![alt text](<../aws/screenshots/ eks.amazonaws:role-arn.png>)
 
 
 

@@ -1,4 +1,4 @@
-﻿
+
 
 services:
 
@@ -116,3 +116,6 @@ services:
 
 volumes:
   postgres_data:
+
+
+in my aws folder there are alot of .md,create one or two .md files in aws folder which explain all but in short and precise way also remove broken images link which are not working  that can take one argument which is the folder name and it should create a tar file and upload it to s3

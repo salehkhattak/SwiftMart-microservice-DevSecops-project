@@ -472,7 +472,7 @@ kubectl logs -n swiftmart deployment/notification-service
 kubectl logs -n swiftmart deployment/frontend
 ```
 
-## Screenshot Evidence
+## Evidence
 
 The following screenshots were captured to verify the Kubernetes deployment.
 
@@ -485,7 +485,7 @@ kubectl get pods -n swiftmart
 ```
 Screenshot:
 
-![](<kubernetes-docs/screenshots/kubectl get pods -n swiftmart.png>)
+![](<kubernetes-docs/screenshots/kubectl get all.png>)
 
 
 
@@ -497,10 +497,6 @@ Command:
 kubectl get svc -n swiftmart
 ```
 
-Screenshot:
-
-![](<kubernetes-docs/screenshots/kubectl get svc -n swiftmart.png>)
-
 ### Ingress
 
 Command:
@@ -508,11 +504,6 @@ Command:
 ```bash
 kubectl get ingress -n swiftmart
 ```
-
-Screenshot:
-
-![](<kubernetes-docs/screenshots/kubectl get ingress -n swiftmart.png>)
-
 ### HPA
 
 Command:
@@ -520,11 +511,6 @@ Command:
 ```bash
 kubectl get hpa -n swiftmart
 ```
-
-Screenshot:
-
-![alt text](<kubernetes-docs/screenshots/kubectl get hpa -n swiftmart.png>)
-
 
 ## Troubleshooting Notes
 

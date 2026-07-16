@@ -14,7 +14,7 @@ Alertmanager
 AWS SNS topic
         |
         v
-Email: fathimayosra25@gmail.com
+Email: salehktk005@gmail.com
 ```
 
 ## What Was Added
@@ -23,7 +23,7 @@ Terraform creates the AWS side:
 
 ```text
 SNS topic: swiftmart-monitoring-alerts
-SNS email subscription: fathimayosra25@gmail.com
+SNS email subscription: salehktk005@gmail.com
 IAM policy: swiftmart-monitoring-alerts-publish-policy
 ```
 
@@ -78,7 +78,7 @@ monitoring_alerts_publish_policy_arn
 AWS sends a confirmation email to:
 
 ```text
-fathimayosra25@gmail.com
+salehktk005@gmail.com
 ```
 
 Open the email and click:

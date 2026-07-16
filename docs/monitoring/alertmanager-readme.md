@@ -93,7 +93,7 @@ swiftmart-monitoring-alerts
 Email endpoint:
 
 ```text
-fathimayosra25@gmail.com
+salehktk005@gmail.com
 ```
 
 ## AWS Resources
@@ -116,7 +116,7 @@ Created resources:
 
 ```text
 SNS topic: swiftmart-monitoring-alerts
-SNS email subscription: fathimayosra25@gmail.com
+SNS email subscription: salehktk005@gmail.com
 IAM policy: swiftmart-monitoring-alerts-publish-policy
 ```
 
@@ -334,29 +334,21 @@ Take screenshots of:
 
 
 1. kubectl get prometheusrule -n swiftmart --show-labels
-![alt text](<../aws/screenshots/kubectl get prometheusrule -n swiftmart --show-labels.png>)
 
 
 2. kubectl get alertmanagerconfig -n swiftmart
-![alt text](<../aws/screenshots/kubectl get alertmanagerconfig -n swiftmart.png>)
 
 3. kubectl get serviceaccount monitoring-kube-prometheus-alertmanager -n monitoring -o yaml
-![alt text](<../aws/screenshots/kubectl get serviceaccount monitoring-kube-prometheus-alertmanager -n monitoring -o yaml.png>)
 
 4. kubectl get application swiftmart -n argocd
-![alt text](<../aws/screenshots/kubectl get application swiftmart -n argocd.png>)
 
 5. Prometheus alerts page: http://localhost:9090/alerts
-![alt text](<../aws/screenshots/Prometheus alerts page-9090:alerts.png>)
 
 6. Alertmanager UI: http://localhost:9093
-![alt text](<../aws/screenshots/ Alertmanager UI- 9093.png>)
 
 7. AWS SNS topic: swiftmart-monitoring-alerts
-![alt text](<../aws/screenshots/AWS SNS topic- swiftmart-monitoring-alerts.png>)
 
 8. AWS SNS email subscription status
-![alt text](<../aws/screenshots/ AWS SNS email subscription status.png>)
 
 
 For the service account screenshot, make sure the IAM role annotation is visible:

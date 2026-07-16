@@ -352,13 +352,10 @@ List tables:
 ## Screenshots
 
 ### Docker compose build
-![](<screenshots/Docker compose build.png>)
 
 ### docker ps
-![](<screenshots/docker ps.png>)
 
 ### docker compose up
-![](<screenshots/docker compose up.png>)
 
 ## Current Status
 

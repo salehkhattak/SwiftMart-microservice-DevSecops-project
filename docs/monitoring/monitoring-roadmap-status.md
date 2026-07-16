@@ -174,7 +174,7 @@ Terraform creates:
 
 ```text
 SNS topic: swiftmart-monitoring-alerts
-Email subscription: fathimayosra25@gmail.com
+Email subscription: salehktk005@gmail.com
 IAM policy: swiftmart-monitoring-alerts-publish-policy
 ```
 
